@@ -59,6 +59,13 @@ const routes = [
     path: '/testvuex',
     name: 'VueXDom',
     component: () => import('@/views/VueXDom/VueXParent.vue')
+  },
+  // 数据看板
+  {
+    path: '/dataView',
+    name: 'DataView',
+    component: () =>
+      import(/* webpackChunkName: "DataView" */ '@/views/DataView/DataView.vue')
   }
 ]
 

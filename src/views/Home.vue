@@ -9,7 +9,6 @@ import ComputedTest from './Computed/ComputedTest'
 import TableInfiniteScroll from './Table/TableInfiniteScroll'
 import TableScroll from './Table/TableScroll'
 import DemoRender from './Demo/DemoRender'
-import FormItemPropDemo from './elementDemo/FormItemPropDemo'
 
 const COM_MAP = {
   TableExportByDom,
@@ -17,8 +16,7 @@ const COM_MAP = {
   ComputedTest,
   TableInfiniteScroll,
   TableScroll,
-  DemoRender,
-  FormItemPropDemo
+  DemoRender
 }
 
 // 首页
@@ -29,7 +27,7 @@ export default {
 
   data () {
     return {
-      name: 'FormItemPropDemo'
+      name: 'DemoRender'
     }
   },
 
