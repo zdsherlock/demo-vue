@@ -1,7 +1,12 @@
 <template>
-	<div id="app">
-		<router-view />
-	</div>
+  <div id="app">
+    <router-view />
+  </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="stylus">
+#app {
+  width: 100%;
+  height:100%
+}
+</style>

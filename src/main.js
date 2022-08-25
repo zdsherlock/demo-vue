@@ -8,7 +8,7 @@ import commonUtils from '@/utils/commonUtils.js'
 import 'element-ui/lib/theme-chalk/index.css'
 
 
-Vue.use(commonUtils)
+Vue.prototype.commonUtils = commonUtils // 全局挂载工具类
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
