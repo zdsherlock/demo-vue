@@ -2,7 +2,10 @@
   <div
     ref="chartModelRef"
     class="chart-model"
-    style="width:100%;height:100%;min-height:250px"
+    style="width:100%;height:100%;"
+    :style="{
+      'min-height': `${minHeight}px`
+    }"
   ></div>
 </template>
 
@@ -13,11 +16,17 @@ export default {
   name: 'ChartModel',
 
   props: {
+    // 图表配置文件
     chartOptions: {
       type: Object,
       default () {
         return null
       }
+    },
+    // 图表最小高度
+    minHeight: {
+      type: Number,
+      default: 200
     }
   },
 
