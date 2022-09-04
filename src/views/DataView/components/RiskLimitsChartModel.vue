@@ -45,13 +45,11 @@ export default {
       default () {
         return '6000000.00'
       }
-    }
-  },
-
-  data () {
-    return {
-      absDesc: 'Delta敞口金额绝对值',
-      limitDesc: 'Delta敞口限额'
+    },
+    // 类型
+    labelType: {
+      type: String,
+      default: 'Delta'
     }
   },
 
@@ -86,6 +84,13 @@ export default {
       } else {
         return `${(percent * 100).toFixed(1)}%`
       }
+    },
+    // 根据标签类型切换描述文字
+    absDesc () {
+      return `${this.labelType}敞口金额绝对值`
+    },
+    limitDesc () {
+      return `${this.labelType}敞口限额`
     }
   },
 
@@ -97,6 +102,7 @@ export default {
 .risk-limits-chart-model {
   min-height: 80px;
   min-width: 250px;
+  margin: 20px 0;
   .chart-title {
     font-size: 12px;
     color: #43434A;
@@ -122,6 +128,9 @@ export default {
       color:#696970;
       text-align: right
     }
+    // 数值样式
+    .abs-val, .limit-val {
+    }
   }
   // 柱状图
   .chart-model{
@@ -137,26 +146,28 @@ export default {
     // 安全色
     .safe {
       background-color: #3F7EFD
+      box-shadow: 0px 2px 4px 0px rgba(63,126,253,0.3)
     }
     // 警告色
     .warning {
       background-color: #FA6400
+      box-shadow: 0px 2px 4px 0px rgba(253,139,63,0.3)
     }
     // 危险色
     .danger {
       background-color: #E2534D
+      box-shadow: 0px 2px 4px 0px rgba(226,83,77,0.3)
     }
     .abs-bar-icon {
       position: absolute;
       width: 40px;
       height: 17px;
-      // box-shadow: 1px 1px 1px 1px red
-      border: 1px solid #FFF
-      border-radius: 8px;
-      right:0;
-      top: -5px;
+      border: 2px solid #FFF
+      border-radius: 12px;
+      right:-10px;
+      top: -7px;
       text-align: center
-      line-height: 16px
+      line-height: 18px
     }
     .abs-bar-icon-desc {
       font-size: 10px;
