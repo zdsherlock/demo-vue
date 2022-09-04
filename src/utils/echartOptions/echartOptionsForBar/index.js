@@ -1,10 +1,11 @@
 // 引入echarts各参数的配置文件
-import {
-  defaultyAxisConfig,
-  defaultGridConfig
-} from '../commonEchartOptionConfig'
+import { defaultyAxisConfig } from '../commonEchartOptionConfig'
 
-import { getSeriesForProfitAndLoss, defaultXAxisConfig } from './config'
+import {
+  getSeriesForProfitAndLoss,
+  defaultXAxisConfig,
+  defaultGridConfig
+} from './config'
 
 // 盈亏图
 export const profitAndLossChartOptions = ({ chartData = [] } = {}) => {

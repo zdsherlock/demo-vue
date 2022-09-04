@@ -1,6 +1,6 @@
 // 通用表格样式
 const DEFAULT_LINE_STYLE_COLOR = '#E1E1E5'
-const DEFAULT_AXIS_LABEL_COLOR = '#9B9BA5'
+const DEFAULT_AXIS_LABEL_COLOR = '#696970'
 const DEFAULT_AXIS_FONT_SIZE = 10
 export const DEFAULT_ICON_SIZE = 12
 
@@ -12,7 +12,8 @@ export const defaultAxisStyle = {
 // 默认坐标轴文字样式
 export const defaultAxisTextStyle = {
   color: DEFAULT_AXIS_LABEL_COLOR,
-  fontSize: DEFAULT_AXIS_FONT_SIZE
+  fontSize: DEFAULT_AXIS_FONT_SIZE,
+  padding: [10, 0, 0, 0]
 }
 // 默认网格线样式
 export const defaultSplitLineStyle = {
@@ -46,12 +47,8 @@ export const defaultLegendConfig = {
   formatter: ['{a|{name}}'].join('\n'),
   textStyle: {
     height: 8,
-    rich: {
-      a: {
-        verticalAlign: 'bottom'
-      }
-    }
+    rich: { a: { verticalAlign: 'bottom' } }
   }
 }
 // 默认网格位置配置
-export const defaultGridConfig = { top: 10, left: 30, right: 20, bottom: 50 }
+export const defaultGridConfig = { top: 50, left: 80, right: 65, bottom: 60 }
