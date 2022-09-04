@@ -66,6 +66,29 @@ const routes = [
     name: 'DataView',
     component: () =>
       import(/* webpackChunkName: "DataView" */ '@/views/DataView/DataView.vue')
+  },
+  // 自定义右键
+  {
+    path: '/custRightClickForTable',
+    name: 'CustRightClickForTable',
+    component: () =>
+      import(
+        /* webpackChunkName: "CustRightClickForTable" */ '@/views/CustRightClick/CustRightClickForTable.vue'
+      )
+  },
+  // render练习
+  {
+    path: '/DemoRender',
+    name: 'DemoRender',
+    component: () =>
+      import(/* webpackChunkName: "DemoRender" */ '@/views/Demo/DemoRender.vue')
+  },
+  // 进程展示练习
+  {
+    path: '/progressSteps',
+    name: 'ProgressSteps',
+    component: () =>
+      import(/* webpackChunkName: "ProgressSteps" */ '@/views/ProgressSteps/ProgressSteps.vue')
   }
 ]
 

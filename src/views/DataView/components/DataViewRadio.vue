@@ -1,6 +1,9 @@
-// 看板单选钮组件
 <template>
-  <el-radio-group v-model="selectedRadio" class="data-view-radio">
+  <el-radio-group
+    v-model="selectedRadio"
+    class="data-view-radio"
+    @change="handleRadioChange"
+  >
     <el-radio-button :label="label1"></el-radio-button>
     <el-radio-button :label="label2"></el-radio-button>
     <el-radio-button v-if="label3" :label="label3"></el-radio-button>
@@ -32,6 +35,13 @@ export default {
     return {
       // radio的控制
       selectedRadio: this.label1
+    }
+  },
+
+  methods: {
+    // radio切换事件
+    handleRadioChange (label) {
+      this.$emit('labelChange', label)
     }
   }
 }

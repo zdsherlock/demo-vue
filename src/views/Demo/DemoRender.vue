@@ -1,6 +1,6 @@
 <script>
 export default {
-  render: function (createElement) {
+  render (createElement) {
     return createElement('div', {
       // 与`v-bind:style`的API相同
       // 接受一个字符串、对象，或对象组成的数组

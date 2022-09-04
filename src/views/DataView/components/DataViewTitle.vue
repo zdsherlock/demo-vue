@@ -1,4 +1,3 @@
-// 数据看板标题组件
 <template>
   <div class="panel-title"><slot></slot></div>
 </template>
@@ -15,8 +14,8 @@ export default {
   align-items: center;
   font-size: 16px;
   color:  #43434A;
-  font-weight: bold;
-  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  font-family: 'PingFangSC-Medium';
   padding: 5px 0;
   vertical-align: baseline
   &::before {
