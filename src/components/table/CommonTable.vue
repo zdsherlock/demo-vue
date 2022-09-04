@@ -1,9 +1,10 @@
 <template>
   <el-table
+    v-loadmore="loadmore"
     ref="mainTable"
     size="small"
     :height="height"
-    :border="true"
+    :border="border"
     :cell-style="setCellStyle"
     :header-cell-style="defaultStyle"
     :data="getTableData"
@@ -12,6 +13,7 @@
     @sort-change="handleSortChange"
     @row-dblclick="handledbClick"
     @row-click="handleClick"
+    @header-contextmenu="handleRightClick"
   >
     <!-- 控制显示序号列 -->
     <el-table-column
@@ -19,6 +21,7 @@
       type="index"
       align="center"
       :fixed="isFixed"
+      width="70"
     >
     </el-table-column>
     <!-- 控制显示选择列 -->
@@ -29,6 +32,7 @@
       :fixed="isFixed"
     >
     </el-table-column>
+    <slot name="before"></slot>
     <!-- 列表数据列渲染 -->
     <el-table-column
       v-for="(item, index) in getCurHeaders"
@@ -44,6 +48,8 @@
       :min-width="item.minWidth"
     >
     </el-table-column>
+
+    <slot name="after"></slot>
   </el-table>
 </template>
 
@@ -51,6 +57,23 @@
 // el-table二次封装 通用列表渲染组件
 export default {
   name: 'CommonTable',
+
+  directives: {
+    loadmore: {
+      bind (el, binding) {
+        const selectWrap = el.querySelector('.el-table__body-wrapper')
+
+        selectWrap.addEventListener('scroll', function () {
+          let sign = 100
+          const scrollDistance =
+            this.scrollHeight - this.scrollTop - this.clientHeight
+          if (scrollDistance <= sign) {
+            binding.value()
+          }
+        })
+      }
+    }
+  },
 
   props: {
     // 表头
@@ -75,8 +98,8 @@ export default {
     isFixed: { type: Boolean, default: false },
     // 自定义高度
     height: { type: String, default: '100%' },
-    // 是否支持无限滚动
-    isInfiniteScroll: { type: Boolean, default: false },
+    // 是否有边框
+    border: { type: Boolean, default: true },
     // 插入自定义样式
     setCellStyle: {
       type: Function,
@@ -85,7 +108,9 @@ export default {
       }
     },
     // name用于区分具体的表格定位
-    name: { type: String, default: '' }
+    name: { type: String, default: '' },
+    // 自定义头部对齐方式
+    headerAlign: { type: String, default: 'center' }
   },
 
   data () {
@@ -94,10 +119,8 @@ export default {
       defaultStyle: {
         background: '#eef1f6',
         color: '#606266',
-        textAlign: 'center'
-      },
-      // 无限滚动加载
-      count: 20
+        textAlign: this.headerAlign
+      }
     }
   },
 
@@ -105,17 +128,8 @@ export default {
     getCurHeaders () {
       return this.curHeaders
     },
-    getTableData: {
-      get () {
-        if (this.isInfiniteScroll) {
-          return this.curTableData.slice(0, this.count)
-        } else {
-          return this.curTableData
-        }
-      },
-      set (val) {
-        return val
-      }
+    getTableData () {
+      return this.curTableData
     }
   },
 
@@ -147,11 +161,19 @@ export default {
         this.$refs.mainTable.bodyWrapper.scrollTop = 0
       })
     },
-    // 无限滚动
-    loadTable () {
-      this.count += 10
-      this.getTableData = this.curTableData.slice(0, this.count)
+    // 加载更多
+    loadmore () {
+      this.$emit('loadmore')
+    },
+    // 右键点击效果
+    handleRightClick (column, event) {
+      this.$emit('handleRightClick', column, event)
     }
+  },
+
+  mounted () {
+    const tableHeader = document.getElementsByClassName('has-gutter')[0]
+    tableHeader.addEventListener('contextmenu', e => e.preventDefault())
   }
 }
 </script>
