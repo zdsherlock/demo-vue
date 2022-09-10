@@ -1,10 +1,17 @@
+<!--
+ * @Author: zd
+ * @Date: 2022-08-30 16:00:33
+ * @LastEditors: zd
+ * @LastEditTime: 2022-09-08 16:47:05
+ * @Description: 趋势图业务处理页面
+-->
 <template>
   <div class="profit-loss-trend data-view-panel">
     <header style="display:flex;justify-content:space-between">
-      <DataViewTitle>{{ curLabel }}图例3</DataViewTitle>
+      <DataViewTitle>{{ labelType }}图例3</DataViewTitle>
       <DataViewRadio
-        label1="label1"
-        label2="label2"
+        :label1="labelMap.label1"
+        :label2="labelMap.label2"
         @labelChange="labelChange"
       ></DataViewRadio>
     </header>
@@ -20,7 +27,7 @@ import ChartModel from './components/DataViewChartModel'
 import DataViewTitle from './components/DataViewTitle.vue'
 import DataViewRadio from './components/DataViewRadio.vue'
 import { getTrendChartOptions } from '@/utils/echartOptions/echartOptionsForLine'
-// 引入测试数据
+import { getObjectKey } from '@/utils/commonUtils'
 
 export default {
   name: 'DataViewPanelForProfitAndLossTrend',
@@ -31,55 +38,65 @@ export default {
     return {
       // 图表配置
       chartOptions: null,
-      // 当前标签
-      curLabel: 'curLabel',
+      // 缓存当前所选中的标签
+      labelType: 'label1',
       // 用于强制刷新echarts
-      chartKey: 0
+      chartKey: 0,
+      // 配置当前radio的标签映射
+      labelMap: { label1: 'label1', label2: 'label2' },
+      // label对应情况下的图表数据
+      label1Data: [
+        [1, 2, 3, 4, 5, 6, 7, 8],
+        [1, 2, 3, 4, 5, 6, 7, 8]
+      ],
+      label2Data: [
+        [1, 2, 3, 4, 5, 6, 7, 8],
+        [1, 2, 3, 4, 5, 6, 7, 8]
+      ]
+    }
+  },
+
+  computed: {
+    getOriginDataByType () {
+      const originDataMap = {
+        label1: this.label1Data,
+        label2: this.label2Data
+      }
+
+      const labelKey = getObjectKey(this.labelMap, this.labelType)
+
+      return originDataMap[labelKey]
     }
   },
 
   methods: {
     // 初始化echarts
-    initChartOption (val) {
-      const iconNames =
-        val === 'curLabel'
-          ? ['curLabel1', 'curLabel2']
-          : ['curLabel1', 'curLabel2', 'curLabel3']
-      const chartData = this.formatChartData(val)
+    initChartOption () {
+      const iconNames = []
+      // 原始数据的切换
+      const originData = this.getOriginDataByType
+      // 图表所需数据的格式化
+      const chartData = this.formatOriginData(originData)
+
       this.chartOptions = getTrendChartOptions({ chartData, iconNames })
       this.chartKey++
     },
     // label切换事件
-    labelChange (val) {
-      this.curLabel = val
-      this.initChartOption(val)
+    labelChange (labelType) {
+      this.labelType = labelType
+      this.initChartOption()
     },
-    // 格式化图表数据
-    formatChartData (curLabel) {
-      const dates = []
-
-      profitRes.data.forEach(ele => {
-        dates.push(ele.business_date)
-        totalIncomes.push(ele.total_income)
-        todayIncomes.push(ele.today_income)
-        totalNotion.push(ele.total_notional_principal.toString())
-        commoNotion.push(ele.commo_notional_principal.toString())
-        equityNotion.push(ele.equity_notional_principal.toString())
-      })
-      const profitData = [dates, todayIncomes, totalIncomes]
-      const notionData = [dates, totalNotion, commoNotion, equityNotion]
-
-      switch (curLabel) {
-        case 'curLabel':
-          return profitData
-        case 'curLabel':
-          return notionData
-      }
+    /**
+     * @Description: 根据需求将原始数据转化为图表所需格式的数据
+     * @param {*} originData
+     */
+    formatOriginData (originData) {
+      return originData
     }
   },
 
   mounted () {
-    this.initChartOption(this.curLabel)
+    this.initChartOption()
   }
 }
 </script>

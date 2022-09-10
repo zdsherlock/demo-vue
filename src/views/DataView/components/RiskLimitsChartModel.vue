@@ -1,17 +1,20 @@
+<!--
+ * @Author: zd
+ * @Date: 2022-08-26 16:47:09
+ * @LastEditors: zd
+ * @LastEditTime: 2022-09-08 14:17:09
+ * @Description: 横向对比图表
+-->
 <template>
   <div class="risk-limits-chart-model">
-    <div class="chart-title">农产品</div>
+    <div class="chart-title">{{ plate }}</div>
     <div class="chart-label">
       <div class="abs-label">
-        <span class="abs-val">{{
-          commonUtils.decimalMoneyFormat(absVal, 2)
-        }}</span>
+        <span class="abs-val">{{ absVal }} 万</span>
         <span class="abs-desc">{{ absDesc }}</span>
       </div>
       <div class="limit-label">
-        <span class="limit-val">{{
-          commonUtils.decimalMoneyFormat(limitVal, 2)
-        }}</span>
+        <span class="limit-val">{{ limitVal }} 万</span>
         <span class="limit-desc">{{ limitDesc }}</span>
       </div>
     </div>
@@ -34,22 +37,29 @@ export default {
   name: 'RiskLimitsChartModel',
 
   props: {
-    absVal: {
+    // 板块
+    plate: {
       type: String,
+      default: ''
+    },
+    // 金额绝对值
+    absVal: {
+      type: [String, Number],
       default () {
-        return '4068193.17'
+        return ''
       }
     },
+    // 敞口限额
     limitVal: {
-      type: String,
+      type: [String, Number],
       default () {
-        return '6000000.00'
+        return ''
       }
     },
     // 类型
     labelType: {
       type: String,
-      default: 'Delta'
+      default: ''
     }
   },
 
@@ -80,7 +90,10 @@ export default {
       const percent = this.absVal / this.limitVal
       // 最长不超过100
       if (percent > 1) {
-        return 1
+        return '100%'
+      } else if (percent < 0.1) {
+        // 低于10的时候为了保持icon的显示效果，返回最低不小于icon长度的值做处理
+        return '10%'
       } else {
         return `${(percent * 100).toFixed(1)}%`
       }
@@ -130,6 +143,7 @@ export default {
     }
     // 数值样式
     .abs-val, .limit-val {
+      font-family: 'yafcoNumber'
     }
   }
   // 柱状图
@@ -173,6 +187,7 @@ export default {
       font-size: 10px;
       transform: scale(0.84)
       color: #FFF;
+      font-family: 'yafcoNumber'
     }
   }
 }

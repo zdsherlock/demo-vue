@@ -26,7 +26,7 @@
 
 <script>
 // 引入工具
-import { domToExcel } from '@/utils/tableExport.js'
+import { arrayToExcel } from '@/utils/excelExport.js'
 
 // 表格导出
 export default {
@@ -62,8 +62,9 @@ export default {
       const tableDom = this.$refs.defaultTableRef
       const fileName = '测试表格'
       const linkDom = this.$refs.dlink
+      const tableHeaders = tableDom.columns
 
-      domToExcel(tableDom, fileName, linkDom)
+      arrayToExcel(tableHeaders, this.tableData, linkDom, fileName)
     }
   },
 
