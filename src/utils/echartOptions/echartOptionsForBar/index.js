@@ -1,17 +1,26 @@
+/*
+ * @Author: zd
+ * @Date: 2022-08-31 08:40:07
+ * @LastEditors: zd
+ * @LastEditTime: 2022-09-05 15:21:30
+ * @Description: 
+ */
 // 引入echarts各参数的配置文件
 import { defaultyAxisConfig } from '../commonEchartOptionConfig'
 
 import {
   getSeriesForProfitAndLoss,
-  defaultXAxisConfig,
+  xAxisConfigForBar,
   defaultGridConfig
 } from './config'
 
-// 盈亏图
+/**
+ * @Description: 柱状盈亏图配置
+ */
 export const profitAndLossChartOptions = ({ chartData = [] } = {}) => {
   return {
     // x轴配置
-    xAxis: defaultXAxisConfig,
+    xAxis: xAxisConfigForBar,
     // y轴配置
     yAxis: defaultyAxisConfig,
     // 动态数据集

@@ -6,8 +6,10 @@ import {
 // 项目公共方法
 import commonUtils from '@/utils/commonUtils'
 
-// 默认x轴配置
-export const defaultXAxisConfig = {
+/**
+ * @Description: 柱状盈亏图X轴配置
+ */
+export const xAxisConfigForBar = {
   type: 'category',
   axisLine: defaultAxisStyle,
   axisLabel: { ...defaultAxisTextStyle, lineHeight: 15 }
@@ -39,6 +41,8 @@ export const getSeriesForProfitAndLoss = () => {
       type: 'bar',
       seriesLayoutBy: 'row',
       barWidth: 11,
+      // 正负双轴显示统一
+      barGap: '-100%',
       itemStyle: { color: '#5AB778' },
       label: {
         show: true,
