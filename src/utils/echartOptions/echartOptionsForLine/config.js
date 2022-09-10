@@ -3,11 +3,12 @@ import * as echarts from 'echarts'
 import {
   defaultAxisStyle,
   defaultAxisTextStyle,
-  defaultSplitLineStyle
+  defaultSplitLineStyle,
+  defaultyAxisConfig
 } from '../commonEchartOptionConfig'
 
 // 默认颜色
-export const DEFAULT_CHART_COLOR_SET = ['#3F7EFD', '#FDAB02', '#E2534D']
+export const LINE_AND_BAR_CORLOR = ['#3F7EFD', '#FDAB02', '#E2534D']
 // 默认区域线图样式
 const defaultShadowAreStyle = new echarts.graphic.LinearGradient(
   // 4个参数用于配置渐变色的起止位置, 这4个参数依次对应右/下/左/上四个方位. 而0 0 0 1则代表渐变色从正上方开始
@@ -32,42 +33,38 @@ const defaultShadowAreStyle = new echarts.graphic.LinearGradient(
 )
 
 // 默认x轴配置
-export const defaultXAxisConfig = {
-  type: 'category',
-  boundaryGap: false,
-  axisLine: defaultAxisStyle,
-  axisLabel: defaultAxisTextStyle
-}
+export const xAxisConfigForTrend = monthList => [
+  {
+    type: 'category',
+    show: false,
+    boundaryGap: false,
+    axisLine: defaultAxisStyle,
+    axisLabel: defaultAxisTextStyle
+  },
+  {
+    type: 'category',
+    boundaryGap: false,
+    axisLine: defaultAxisStyle,
+    axisLabel: defaultAxisTextStyle,
+    data: monthList,
+    position: 'bottom'
+  }
+]
 // 默认y轴配置
 export const getYAxisConfig = iconNames => {
   if (iconNames.length === 3) {
-    return {
-      type: 'value',
-      axisLine: defaultAxisStyle,
-      axisLabel: defaultAxisTextStyle,
-      splitLine: { lineStyle: defaultSplitLineStyle }
-    }
+    return defaultyAxisConfig
   } else {
     return [
       {
         name: '当日盈亏',
-        type: 'value',
-        axisLine: defaultAxisStyle,
-        axisLabel: defaultAxisTextStyle,
-        splitLine: { lineStyle: defaultSplitLineStyle },
-        nameTextStyle: {
-          color: '#696970'
-        }
+        ...defaultyAxisConfig,
+        nameTextStyle: { color: '#696970' }
       },
       {
         name: '累计盈亏',
-        type: 'value',
-        axisLine: defaultAxisStyle,
-        axisLabel: defaultAxisTextStyle,
-        splitLine: { lineStyle: defaultSplitLineStyle },
-        nameTextStyle: {
-          color: '#696970'
-        }
+        ...defaultyAxisConfig,
+        nameTextStyle: { color: '#696970' }
       }
     ]
   }

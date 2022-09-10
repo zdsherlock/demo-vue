@@ -40,16 +40,14 @@ export default {
   methods: {
     // 初始化echarts的DOM
     initChartModel () {
-      this.$nextTick(() => {
-        const chartDom = this.$refs.chartModelRef
-        const myChart = echarts.init(chartDom)
-        // 添加监听对象
-        this.resizeListener = () => myChart.resize()
-        window.addEventListener('resize', this.resizeListener)
-        // 清空画布
-        myChart.clear()
-        this.chartOptions && myChart.setOption(this.chartOptions)
-      })
+      const chartDom = this.$refs.chartModelRef
+      const myChart = echarts.init(chartDom)
+      // 添加监听对象
+      this.resizeListener = () => myChart.resize()
+      window.addEventListener('resize', this.resizeListener)
+      // 清空画布
+      myChart.clear()
+      this.chartOptions && myChart.setOption(this.chartOptions)
     }
   },
 

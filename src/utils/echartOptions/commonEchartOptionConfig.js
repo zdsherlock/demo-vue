@@ -33,7 +33,10 @@ export const defaultXAxisConfig = {
 export const defaultyAxisConfig = {
   type: 'value',
   axisLine: defaultAxisStyle,
-  axisLabel: defaultAxisTextStyle,
+  axisLabel: {
+    ...defaultAxisTextStyle,
+    formatter: value => `${value / 10000} W`
+  },
   splitLine: { lineStyle: defaultSplitLineStyle }
 }
 // 默认图例配置
@@ -51,4 +54,4 @@ export const defaultLegendConfig = {
   }
 }
 // 默认网格位置配置
-export const defaultGridConfig = { top: 50, left: 80, right: 65, bottom: 60 }
+export const defaultGridConfig = { top: 40, left: 70, right: 65, bottom: 60 }

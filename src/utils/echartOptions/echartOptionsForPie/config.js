@@ -1,14 +1,5 @@
-import { DEFAULT_ICON_SIZE } from '../commonEchartOptionConfig'
-// 默认颜色
-export const DEFAULT_CHART_COLOR_SET = [
-  '#3F7EFD',
-  '#3AD2FF',
-  '#00D08B',
-  '#3CC4B9',
-  '#C1DF07',
-  '#FDAB02',
-  '#FA6400'
-]
+import { defaultLegendConfig } from '../commonEchartOptionConfig'
+
 // 数值中文化缩略
 const numCapital = num => {
   if (isNaN(num)) return num
@@ -19,13 +10,21 @@ const numCapital = num => {
     return nums / 10000 + '万'
   }
 }
+// 饼图颜色集合
+// 默认颜色
+export const PIE_COLOR = [
+  '#3F7EFD',
+  '#3AD2FF',
+  '#00D08B',
+  '#3CC4B9',
+  '#C1DF07',
+  '#FDAB02',
+  '#FA6400'
+]
+
 // 默认图例配置
-export const defaultLegendConfig = {
-  icon: 'roundRect',
-  itemWidth: DEFAULT_ICON_SIZE,
-  itemHeight: DEFAULT_ICON_SIZE,
-  top: 'bottom',
-  itemGap: 18,
+export const legendConfigForPie = {
+  ...defaultLegendConfig,
   // 4字以上的中文字符省略
   formatter: name => {
     const chsReg = /^[\u4e00-\u9fa5]{0,}$/g
@@ -37,28 +36,22 @@ export const defaultLegendConfig = {
     }
   },
   tooltip: { show: true, trigger: 'item' },
-  textStyle: {
-    height: 0,
-    lineHeight: 0,
-    rich: { a: { verticalAlign: 'bottom' } }
-  }
+  textStyle: { height: 0, lineHeight: 0 }
 }
 
 // 生成走势图的series配置
 export const getSeriesForPercentageChart = (
   positionConfigs = ['50%', '50%'],
   isShowVal = false
-) => {
-  return [
-    {
-      type: 'pie',
-      radius: ['40%', '60%'],
-      itemStyle: { borderColor: '#fff', borderWidth: 2 },
-      center: positionConfigs,
-      label: {
-        formatter: ({ data, percent }) =>
-          isShowVal ? `${percent}%(${numCapital(data.value)})` : `${percent}%`
-      }
+) => [
+  {
+    type: 'pie',
+    radius: ['40%', '60%'],
+    itemStyle: { borderColor: '#fff', borderWidth: 2 },
+    center: positionConfigs,
+    label: {
+      formatter: ({ data, percent }) =>
+        isShowVal ? `${percent}%(${numCapital(data.value)})` : `${percent}%`
     }
-  ]
-}
+  }
+]
