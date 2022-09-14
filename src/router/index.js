@@ -88,14 +88,25 @@ const routes = [
     path: '/progressSteps',
     name: 'ProgressSteps',
     component: () =>
-      import(/* webpackChunkName: "ProgressSteps" */ '@/views/ProgressSteps/ProgressSteps.vue')
+      import(
+        /* webpackChunkName: "ProgressSteps" */ '@/views/ProgressSteps/ProgressSteps.vue'
+      )
   },
   // select练习
   {
     path: '/diffSelect',
     name: 'DiffSelect',
     component: () =>
-      import(/* webpackChunkName: "DiffSelect" */ '@/views/SelectDemo/DiffSelect.vue')
+      import(
+        /* webpackChunkName: "DiffSelect" */ '@/views/SelectDemo/DiffSelect.vue'
+      )
+  },
+  // FormDemo
+  {
+    path: '/formDemo',
+    name: 'FormDemo',
+    component: () =>
+      import(/* webpackChunkName: "FormDemo" */ '@/views/FormDemo/FormDemo.vue')
   }
 ]
 
