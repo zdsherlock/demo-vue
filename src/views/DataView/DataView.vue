@@ -8,19 +8,19 @@
       @toggleFullScreen="toggleFullScreen"
     ></DataViewPanelForGeneralIndex>
     <div style="display:flex">
-      <DataViewPanelForProfitAndLossTrend
+      <DataViewPanelForTrend
         style="flex-grow:1;margin-right:16px;width:0"
         :key="panelKey"
-      ></DataViewPanelForProfitAndLossTrend>
-      <DataViewPanelForProfitAndLoss
+      ></DataViewPanelForTrend>
+      <DataViewPanelForBarTrend
         :style="{ width: asidePanelWidth }"
         :key="panelKey + 1"
-      ></DataViewPanelForProfitAndLoss>
+      ></DataViewPanelForBarTrend>
     </div>
     <div style="display:flex">
-      <DataViewPanelForRiskLimits
+      <DataViewPanelForPercent
         style="flex-grow:1;margin-right:16px;width:0"
-      ></DataViewPanelForRiskLimits>
+      ></DataViewPanelForPercent>
       <DataViewPanelForWarningMsg
         :style="{ width: asidePanelWidth }"
         :key="panelKey"
@@ -42,11 +42,11 @@
 </template>
 
 <script>
-import DataViewPanelForProfitAndLossTrend from './DataViewPanelForProfitAndLossTrend'
+import DataViewPanelForTrend from './DataViewPanelForTrend'
 import DataViewPanelForConcentrationShare from './DataViewPanelForConcentrationShare'
-import DataViewPanelForProfitAndLoss from './DataViewPanelForProfitAndLoss'
+import DataViewPanelForBarTrend from './DataViewPanelForBarTrend'
 import DataViewPanelForGeneralIndex from './DataViewPanelForGeneralIndex'
-import DataViewPanelForRiskLimits from './DataViewPanelForRiskLimits'
+import DataViewPanelForPercent from './DataViewPanelForPercent'
 import DataViewPanelForCashDeposit from './DataViewPanelForCashDeposit'
 import DataViewPanelForWarningMsg from './DataViewPanelForWarningMsg'
 import DataViewPanelForExtendCredit from './DataViewPanelForExtendCredit'
@@ -71,11 +71,11 @@ export default {
   },
 
   components: {
-    DataViewPanelForProfitAndLossTrend,
+    DataViewPanelForTrend,
     DataViewPanelForConcentrationShare,
-    DataViewPanelForProfitAndLoss,
+    DataViewPanelForBarTrend,
     DataViewPanelForGeneralIndex,
-    DataViewPanelForRiskLimits,
+    DataViewPanelForPercent,
     DataViewPanelForCashDeposit,
     DataViewPanelForWarningMsg,
     DataViewPanelForExtendCredit

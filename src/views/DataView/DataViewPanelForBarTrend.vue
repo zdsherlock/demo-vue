@@ -1,3 +1,10 @@
+<!--
+ * @Author: zd
+ * @Date: 2022-09-14 23:54:17
+ * @LastEditors: zd
+ * @LastEditTime: 2022-09-16 22:24:02
+ * @Description: 
+-->
 <template>
   <div class="profit-loss data-view-panel">
     <header style="display:flex;justify-content:space-between">
@@ -22,7 +29,7 @@ import DataViewRadio from './components/DataViewRadio.vue'
 import { profitAndLossChartOptions } from '@/utils/echartOptions/echartOptionsForBar'
 
 export default {
-  name: 'DataViewPanelForProfitAndLoss',
+  name: 'DataViewPanelForBarTrend',
 
   components: { ChartModel, DataViewTitle, DataViewRadio },
 

@@ -2,7 +2,7 @@
  * @Author: zd
  * @Date: 2022-08-30 16:00:33
  * @LastEditors: zd
- * @LastEditTime: 2022-09-08 14:04:16
+ * @LastEditTime: 2022-09-16 22:24:23
  * @Description: 限额图表
 -->
 <template>
@@ -37,7 +37,7 @@ import DataViewRadio from './components/DataViewRadio.vue'
 import RiskLimitsChartModel from './components/RiskLimitsChartModel'
 
 export default {
-  name: 'DataViewPanelForRiskLimits',
+  name: 'DataViewPanelForPercent',
 
   components: { DataViewTitle, DataViewRadio, RiskLimitsChartModel },
 
