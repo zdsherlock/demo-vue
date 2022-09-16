@@ -2,7 +2,7 @@
  * @Author: zd
  * @Date: 2022-08-30 16:00:33
  * @LastEditors: zd
- * @LastEditTime: 2022-09-14 13:52:52
+ * @LastEditTime: 2022-09-16 22:23:23
  * @Description: 趋势图业务处理页面
 -->
 <template>
@@ -29,7 +29,7 @@ import DataViewRadio from './components/DataViewRadio.vue'
 import { getTrendChartOptions } from '@/utils/echartOptions/echartOptionsForLine'
 
 export default {
-  name: 'DataViewPanelForProfitAndLossTrend',
+  name: 'DataViewPanelForTrend',
 
   components: { ChartModel, DataViewTitle, DataViewRadio },
 
